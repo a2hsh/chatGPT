@@ -97,7 +97,6 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                         disabled={!settings.included.prompt}
                         aria-label="prompt"
                     />
-                    {renderCheckbox("prompt")}
                     <label htmlFor="model-selector">Select Model:</label>
                     <select
                         value={settings.selectedModel}
@@ -137,7 +136,7 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                     {renderCheckbox("stream")}
                     <button
                         onClick={handleSaveSettings}
-                        disabled={!settings.apiKey}
+                        disabled={!settings.apiKey || !settings.prompt}
                     >
                         Save Settings
                     </button>
