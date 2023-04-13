@@ -20,6 +20,11 @@ const ChatMessages = ({ messages }) => {
         //create file content
         //in the file content, get formatted date and time
         let fileContent = `# Chat GPT Transcript ffor ${dayName}, ${hour}:${minutes}:${seconds}\n\n`;
+        //add prompt
+        fileContent += `## Prompt\n`;
+        fileContent += `${
+            JSON.parse(localStorage.getItem("settings")).prompt
+        }\n\n`;
         messages.forEach((message) => {
             fileContent += `## ${message.sender}\n`;
             fileContent += `${message.content}\n`;
