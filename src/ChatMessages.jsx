@@ -15,7 +15,7 @@ const ChatMessages = ({ messages }) => {
         const seconds = date.getSeconds();
 
         //create file name
-        const fileName = `chatLog-${year}-${month}-${day}_${hour}-${minutes}-${seconds}.txt`;
+        const fileName = `chatTranscript-${year}-${month}-${day}_${hour}-${minutes}-${seconds}.txt`;
 
         //create file content
         //in the file content, get formatted date and time
@@ -63,7 +63,7 @@ const ChatMessages = ({ messages }) => {
                             e.target.innerText = `Copied ${message.sender}'s message!`;
                         }}
                     >
-                        Copy {message.sender}'s message
+                        Copy {message.sender} message
                     </button>
                 </div>
             ))}
