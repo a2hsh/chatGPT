@@ -74,6 +74,7 @@ const App = () => {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${settings.apiKey}`,
+                        // Add the same headers as the chat API request
                     },
                     body: JSON.stringify(requestOptions),
                 }
