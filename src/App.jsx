@@ -100,6 +100,10 @@ const App = () => {
         }
     };
 
+    const sendAudio = async (audio) => {
+        // Send audio recording to Whisper API
+    };
+
     const onSettingsChange = (newSettings) => {
         setSettings(newSettings);
     };
@@ -126,7 +130,7 @@ const App = () => {
                 {canChat && settings && (
                     <>
                         <ChatMessages messages={messages} role="log" aria-label="Chat messages" />
-                        <ChatInput sendMessage={sendMessage} role="textbox" aria-label="Chat input" />
+                        <ChatInput sendMessage={sendMessage} sendAudio={sendAudio} role="textbox" aria-label="Chat input" />
                         <div
                             className="api-typing-status"
                             aria-live="polite"
@@ -137,6 +141,10 @@ const App = () => {
                         </div>
                     </>
                 )}
+            </Container>
+        );
+};
+export default App;
             </Container>
         );
 };
