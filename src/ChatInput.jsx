@@ -9,6 +9,11 @@ const ChatInput = ({ sendMessage }) => {
         // Send recorded audio to the Whisper OpenAI API
         // Retrieve transcribed text from API response
         // Use sendMessage function to display transcribed text as a user message in the chat
+    
+        // Add code to handle the recording process
+        // Send the recorded audio to the Whisper OpenAI API
+        // Retrieve the transcribed text from the API response
+        // Use the sendMessage function to display the transcribed text as a user message in the chat
     };
 
     const handleSubmit = (e) => {
