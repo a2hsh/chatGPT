@@ -30,7 +30,26 @@ const ChatInput = ({ sendMessage }) => {
                 required
                 aria-label="Type your message..."
             />
-            <button type="submit">Send</button>
+            {message === "" ? (
+                <button type="button" onClick={startRecording} aria-label="Start recording">
+                    <i className="fas fa-microphone"></i>
+                </button>
+            ) : (
+                <button type="submit">Send</button>
+            )}
+            {isRecording && (
+                <>
+                    <button type="button" onClick={pauseRecording} aria-label="Pause recording">
+                        <i className="fas fa-pause"></i>
+                    </button>
+                    <button type="button" onClick={cancelRecording} aria-label="Cancel recording">
+                        <i className="fas fa-times"></i>
+                    </button>
+                    <button type="button" onClick={sendRecording} aria-label="Send recording">
+                        <i className="fas fa-paper-plane"></i>
+                    </button>
+                </>
+            )}
         </form>
     );
 };
