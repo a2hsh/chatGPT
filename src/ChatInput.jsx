@@ -23,6 +23,20 @@ const ChatInput = ({ sendMessage }) => {
         setRecording(false);
     };
 
+    // Connect button click handlers to respective functions
+    <button type="button" onClick={handleStartRecording}>
+        <i className="fas fa-microphone"></i>
+    </button>
+    <button type="button" onClick={handlePauseRecording}>
+        <i className="fas fa-pause"></i>
+    </button>
+    <button type="button" onClick={handleCancelRecording}>
+        <i className="fas fa-times"></i>
+    </button>
+    <button type="button" onClick={handleSendRecording}>
+        <i className="fas fa-paper-plane"></i>
+    </button>
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (message.trim()) {
