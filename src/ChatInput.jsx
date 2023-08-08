@@ -13,7 +13,7 @@ const ChatInput = ({ sendMessage }) => {
     };
 
     const handleMicrophoneClick = () => {
-        // Implement recording functionality here
+        setIsRecording(!isRecording);
     };
 
     return (
