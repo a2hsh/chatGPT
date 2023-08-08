@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Form, FormGroup, Label, Button } from 'react-bootstrap';
 
 const Preferences = ({ onShow, onHide, onSettingsChange }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -141,38 +142,40 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                         Save Settings
                     </button>
                     <Form role="form" aria-label="Chat settings">
-                        {showSettings && (
-                            <div className="settings">
-                                <h2>Settings</h2>
-                                <FormGroup>
-                                    <Label htmlFor="api-key-input">API Key:</Label>
-                                    {renderInput("apiKey")}
-                                </FormGroup>
-                                ...
-                                <Button
-                                    onClick={handleSaveSettings}
-                                    disabled={!settings.apiKey || !settings.prompt}
-                                >
-                                    Save Settings
-                                </Button>
-                                ...
-                            </div>
-                        )}
-                        {!showSettings && !isEditing && (
-                            <Button
-                                type="button"
-                                onClick={() => {
-                                    setIsEditing(true);
-                                    setShowSettings(true);
-                                    if (onShow && typeof onShow === "function") {
-                                        onShow();
-                                    }
-                                }}
-                            >
-                                Edit Preferences
-                            </Button>
-                        )}
-                    </Form>
+    return (
+        <Form role="form" aria-label="Chat settings">
+            {showSettings && (
+                <div>
+                    <h2>Settings</h2>
+                    <FormGroup>
+                        <Label htmlFor="api-key-input">API Key:</Label>
+                        {renderInput("apiKey")}
+                    </FormGroup>
+                    ...
+                    <Button
+                        onClick={handleSaveSettings}
+                        disabled={!settings.apiKey || !settings.prompt}
+                    >
+                        Save Settings
+                    </Button>
+                    ...
+                </div>
+            )}
+            {!showSettings && !isEditing && (
+                <Button
+                    type="button"
+                    onClick={() => {
+                        setIsEditing(true);
+                        setShowSettings(true);
+                        if (onShow && typeof onShow === "function") {
+                            onShow();
+                        }
+                    }}
+                >
+                    Edit Preferences
+                </Button>
+            )}
+        </Form>
     );
 };
 export default Preferences;
