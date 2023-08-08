@@ -85,49 +85,6 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
     );
 
     return (
-        <div>
-            {showSettings && (
-                <div className="settings">
-                    <h2>Settings</h2>
-                    <label htmlFor="api-key-input">API Key:</label>
-                    {renderInput("apiKey")}
-                    <label htmlFor="prompt-textarea">Prompt:</label>
-                    <textarea
-                        value={settings.prompt}
-                        onChange={(event) => handleInputChange(event, "prompt")}
-                        disabled={!settings.included.prompt}
-                        aria-label="prompt"
-                    />
-                    <label htmlFor="model-selector">Select Model:</label>
-                    <select
-                        value={settings.selectedModel}
-                        onChange={(event) =>
-                            handleInputChange(event, "selectedModel")
-                        }
-                    >
-                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-                        <option value="gpt-3.5">GPT-3.5</option>
-                        <option value="gpt-4">GPT-4</option>
-                        {/* Add other models here as necessary */}
-                    </select>
-                    <label htmlFor="max-tokens-input">Max Tokens:</label>
-                    {renderInput("maxTokens", "text", "[0-9]*")}
-                    {renderCheckbox("maxTokens")}
-                    <label htmlFor="temperature-input">Temperature:</label>
-                    {renderInput("temperature", "number")}
-                    {renderCheckbox("temperature")}
-                    <label htmlFor="top-p-input">Top P:</label>
-                    {renderInput("topP", "number")}
-                    {renderCheckbox("topP")}
-                    <label htmlFor="frequency-penalty-input">
-                        Frequency Penalty:
-                    </label>
-                    {renderInput("frequencyPenalty", "number")}
-                    {renderCheckbox("frequencyPenalty")}
-                    <label htmlFor="presence-penalty-input">
-                        Presence Penalty:
-                    </label>
-    return (
         <Form role="form" aria-label="Chat settings">
             {showSettings && (
                 <div className="settings">
@@ -136,14 +93,64 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                         <Label htmlFor="api-key-input">API Key:</Label>
                         {renderInput("apiKey")}
                     </FormGroup>
-                    ...
+                    <FormGroup>
+                        <Label htmlFor="prompt-textarea">Prompt:</Label>
+                        <textarea
+                            value={settings.prompt}
+                            onChange={(event) => handleInputChange(event, "prompt")}
+                            disabled={!settings.included.prompt}
+                            aria-label="prompt"
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="model-selector">Select Model:</Label>
+                        <select
+                            value={settings.selectedModel}
+                            onChange={(event) =>
+                                handleInputChange(event, "selectedModel")
+                            }
+                        >
+                            <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="gpt-3.5">GPT-3.5</option>
+                            <option value="gpt-4">GPT-4</option>
+                            {/* Add other models here as necessary */}
+                        </select>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="max-tokens-input">Max Tokens:</Label>
+                        {renderInput("maxTokens", "text", "[0-9]*")}
+                        {renderCheckbox("maxTokens")}
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="temperature-input">Temperature:</Label>
+                        {renderInput("temperature", "number")}
+                        {renderCheckbox("temperature")}
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="top-p-input">Top P:</Label>
+                        {renderInput("topP", "number")}
+                        {renderCheckbox("topP")}
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="frequency-penalty-input">
+                            Frequency Penalty:
+                        </Label>
+                        {renderInput("frequencyPenalty", "number")}
+                        {renderCheckbox("frequencyPenalty")}
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="presence-penalty-input">
+                            Presence Penalty:
+                        </Label>
+                        {renderInput("presencePenalty", "number")}
+                        {renderCheckbox("presencePenalty")}
+                    </FormGroup>
                     <Button
                         onClick={handleSaveSettings}
                         disabled={!settings.apiKey || !settings.prompt}
                     >
                         Save Settings
                     </Button>
-                    ...
                 </div>
             )}
             {!showSettings && !isEditing && (
@@ -161,5 +168,6 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                 </Button>
             )}
         </Form>
+    );
 };
 export default Preferences;
