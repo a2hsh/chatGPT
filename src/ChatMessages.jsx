@@ -48,30 +48,41 @@ const ChatMessages = ({ messages }) => {
             aria-live="polite"
             aria-atomic="false"
         >
-            {messages.map((message, index) => (
-                <div
-                    key={index}
-                    className={`chat-message ${
-                        message.sender === "user"
-                            ? "user-message"
-                            : "ai-message"
-                    }`}
-                >
-                    <h2>{message.sender}</h2>
-                    <p>
-                        <ReactMarkdown>{message.content}</ReactMarkdown>
-                    </p>
-                    <button
-                        onClick={(e) => {
-                            navigator.clipboard.writeText(message.content);
-                            //change button text
-                            e.target.innerText = `Copied ${message.sender}'s message!`;
-                        }}
-                    >
-                        Copy {message.sender} message
-                    </button>
+    {messages.map((message, index) => (
+        <div
+            key={index}
+            className={`chat-message ${
+                message.sender === "user"
+                    ? "user-message"
+                    : "ai-message"
+            }`}
+        >
+            <h2>{message.sender}</h2>
+            {message.audio && (
+                <div>
+                    <audio controls>
+                        <source src={message.audio} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                    </audio>
+                    {message.transcription && (
+                        <p>{message.transcription}</p>
+                    )}
                 </div>
-            ))}
+            )}
+            <p>
+                <ReactMarkdown>{message.content}</ReactMarkdown>
+            </p>
+            <button
+                onClick={(e) => {
+                    navigator.clipboard.writeText(message.content);
+                    //change button text
+                    e.target.innerText = `Copied ${message.sender}'s message!`;
+                }}
+            >
+                Copy {message.sender} message
+            </button>
+        </div>
+    ))}
             {messages.length > 0 && (
                 <button
                     onClick={() => {
