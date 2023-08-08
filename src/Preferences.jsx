@@ -140,37 +140,39 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                     >
                         Save Settings
                     </button>
-                    {isEditing && (
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setShowSettings(false);
-                                setIsEditing(false);
-                                if (onHide && typeof onHide === "function") {
-                                    onHide();
-                                }
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    )}
-                </div>
-            )}
-            {!showSettings && !isEditing && (
-                <button
-                    type="button"
-                    onClick={() => {
-                        setIsEditing(true);
-                        setShowSettings(true);
-                        if (onShow && typeof onShow === "function") {
-                            onShow();
-                        }
-                    }}
-                >
-                    Edit Preferences
-                </button>
-            )}
-        </div>
+                    <Form role="form" aria-label="Chat settings">
+                        {showSettings && (
+                            <div className="settings">
+                                <h2>Settings</h2>
+                                <FormGroup>
+                                    <Label htmlFor="api-key-input">API Key:</Label>
+                                    {renderInput("apiKey")}
+                                </FormGroup>
+                                ...
+                                <Button
+                                    onClick={handleSaveSettings}
+                                    disabled={!settings.apiKey || !settings.prompt}
+                                >
+                                    Save Settings
+                                </Button>
+                                ...
+                            </div>
+                        )}
+                        {!showSettings && !isEditing && (
+                            <Button
+                                type="button"
+                                onClick={() => {
+                                    setIsEditing(true);
+                                    setShowSettings(true);
+                                    if (onShow && typeof onShow === "function") {
+                                        onShow();
+                                    }
+                                }}
+                            >
+                                Edit Preferences
+                            </Button>
+                        )}
+                    </Form>
     );
 };
 export default Preferences;
