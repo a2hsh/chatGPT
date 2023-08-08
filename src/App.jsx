@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container } from 'react-bootstrap';
 import Preferences from "./Preferences";
 import ChatInput from "./ChatInput";
 import ChatMessages from "./ChatMessages";
@@ -114,7 +115,7 @@ const App = () => {
     };
 
     return (
-            <Container className="app">
+            <Container>
                 <Preferences
                     onShow={onSettingsShow}
                     onHide={onSettingsHide}
