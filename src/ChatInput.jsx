@@ -2,6 +2,62 @@ import React, { useState } from "react";
 
 const ChatInput = ({ sendMessage }) => {
     const [message, setMessage] = useState("");
+    const [isRecording, setIsRecording] = useState(false);
+    const [recording, setRecording] = useState(null);
+
+    const startRecording = async () => {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+        setIsRecording(true);
+
+        const audioChunks = [];
+        mediaRecorder.addEventListener("dataavailable", (event) => {
+            audioChunks.push(event.data);
+        });
+
+        mediaRecorder.addEventListener("stop", () => {
+            const audioBlob = new Blob(audioChunks);
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+            setRecording(audio);
+        });
+
+        setMediaRecorder(mediaRecorder);
+    };
+
+    const pauseRecording = () => {
+        if (mediaRecorder) {
+            mediaRecorder.pause();
+            setIsRecording(false);
+        }
+    };
+
+    const cancelRecording = () => {
+        if (mediaRecorder) {
+            mediaRecorder.stop();
+            setIsRecording(false);
+            setRecording(null);
+        }
+    };
+
+    const sendRecording = async () => {
+        if (recording) {
+            // Send the recording to the Whisper OpenAI API for conversion to text
+            // This is a placeholder and needs to be replaced with the actual API call
+            const response = await fetch("https://api.openai.com/v1/whisper", {
+                method: "POST",
+                body: recording,
+            });
+            const data = await response.json();
+            const text = data.text;
+
+            // Send the converted text as a message
+            sendMessage(text);
+            setIsRecording(false);
+            setRecording(null);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
