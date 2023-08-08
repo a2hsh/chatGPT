@@ -127,20 +127,39 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                     <label htmlFor="presence-penalty-input">
                         Presence Penalty:
                     </label>
-                    {renderInput("presencePenalty", "number")}
-                    {renderCheckbox("presencePenalty")}
-                    <label htmlFor="n-input">N:</label>
-                    {renderInput("n", "number")}
-                    {renderCheckbox("n")}
-                    <label htmlFor="stream-input">Stream</label>
-                    {renderInput("stream", "checkbox")}
-                    {renderCheckbox("stream")}
-                    <button
+    return (
+        <Form role="form" aria-label="Chat settings">
+            {showSettings && (
+                <div className="settings">
+                    <h2>Settings</h2>
+                    <FormGroup>
+                        <Label htmlFor="api-key-input">API Key:</Label>
+                        {renderInput("apiKey")}
+                    </FormGroup>
+                    ...
+                    <Button
                         onClick={handleSaveSettings}
                         disabled={!settings.apiKey || !settings.prompt}
                     >
                         Save Settings
-                    </button>
-                    </div>
+                    </Button>
+                    ...
+                </div>
+            )}
+            {!showSettings && !isEditing && (
+                <Button
+                    type="button"
+                    onClick={() => {
+                        setIsEditing(true);
+                        setShowSettings(true);
+                        if (onShow && typeof onShow === "function") {
+                            onShow();
+                        }
+                    }}
+                >
+                    Edit Preferences
+                </Button>
+            )}
+        </Form>
 };
 export default Preferences;
