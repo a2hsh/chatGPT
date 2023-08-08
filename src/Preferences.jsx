@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, FormGroup, Label, Button } from "react-bootstrap";
+import { Form, FormGroup, FormLabel, Button } from "react-bootstrap";
 
 const Preferences = ({ onShow, onHide, onSettingsChange }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -89,12 +89,26 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
             {showSettings && (
                 <div className="settings">
                     <h2>Settings</h2>
+                    {isEditing && (
+                        <Button
+                            type="button"
+                            onClick={() => {
+                                setShowSettings(false);
+                                setIsEditing(false);
+                                if (onHide && typeof onHide === "function") {
+                                    onHide();
+                                }
+                            }}
+                        >
+                            Close
+                        </Button>
+                    )}
                     <FormGroup>
-                        <Label htmlFor="api-key-input">API Key:</Label>
+                        <FormLabel htmlFor="api-key-input">API Key:</FormLabel>
                         {renderInput("apiKey")}
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="prompt-textarea">Prompt:</Label>
+                        <FormLabel htmlFor="prompt-textarea">Prompt:</FormLabel>
                         <textarea
                             value={settings.prompt}
                             onChange={(event) =>
@@ -105,7 +119,9 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                         />
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="model-selector">Select Model:</Label>
+                        <FormLabel htmlFor="model-selector">
+                            Select Model:
+                        </FormLabel>
                         <select
                             value={settings.selectedModel}
                             onChange={(event) =>
@@ -119,31 +135,35 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                         </select>
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="max-tokens-input">Max Tokens:</Label>
+                        <FormLabel htmlFor="max-tokens-input">
+                            Max Tokens:
+                        </FormLabel>
                         {renderInput("maxTokens", "text", "[0-9]*")}
                         {renderCheckbox("maxTokens")}
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="temperature-input">Temperature:</Label>
+                        <FormLabel htmlFor="temperature-input">
+                            Temperature:
+                        </FormLabel>
                         {renderInput("temperature", "number")}
                         {renderCheckbox("temperature")}
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="top-p-input">Top P:</Label>
+                        <FormLabel htmlFor="top-p-input">Top P:</FormLabel>
                         {renderInput("topP", "number")}
                         {renderCheckbox("topP")}
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="frequency-penalty-input">
+                        <FormLabel htmlFor="frequency-penalty-input">
                             Frequency Penalty:
-                        </Label>
+                        </FormLabel>
                         {renderInput("frequencyPenalty", "number")}
                         {renderCheckbox("frequencyPenalty")}
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="presence-penalty-input">
+                        <FormLabel htmlFor="presence-penalty-input">
                             Presence Penalty:
-                        </Label>
+                        </FormLabel>
                         {renderInput("presencePenalty", "number")}
                         {renderCheckbox("presencePenalty")}
                     </FormGroup>
