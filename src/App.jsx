@@ -114,27 +114,29 @@ const App = () => {
     };
 
     return (
-        <div className="app">
-            <Preferences
-                onShow={onSettingsShow}
-                onHide={onSettingsHide}
-                onSettingsChange={onSettingsChange}
-            />
-            {canChat && settings && (
-                <>
-                    <ChatMessages messages={messages} />
-                    <ChatInput sendMessage={sendMessage} />
-                    <div
-                        className="api-typing-status"
-                        aria-live="polite"
-                        aria-atomic="true"
-                        role="status"
-                    >
-                        {isApiTyping ? "ChatGPT is typing..." : ""}
-                    </div>
-                </>
-            )}
-        </div>
-    );
+            <Container className="app">
+                <Preferences
+                    onShow={onSettingsShow}
+                    onHide={onSettingsHide}
+                    onSettingsChange={onSettingsChange}
+                    role="form"
+                    aria-label="Chat settings"
+                />
+                {canChat && settings && (
+                    <>
+                        <ChatMessages messages={messages} role="log" aria-label="Chat messages" />
+                        <ChatInput sendMessage={sendMessage} role="textbox" aria-label="Chat input" />
+                        <div
+                            className="api-typing-status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                            role="status"
+                        >
+                            {isApiTyping ? "ChatGPT is typing..." : ""}
+                        </div>
+                    </>
+                )}
+            </Container>
+        );
 };
 export default App;
