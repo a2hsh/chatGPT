@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const ChatInput = ({ sendMessage }) => {
     const [message, setMessage] = useState("");
+    const [isRecording, setIsRecording] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -9,6 +10,10 @@ const ChatInput = ({ sendMessage }) => {
             sendMessage(message.trim());
             setMessage("");
         }
+    };
+
+    const handleMicrophoneClick = () => {
+        // Implement recording functionality here
     };
 
     return (
@@ -30,6 +35,13 @@ const ChatInput = ({ sendMessage }) => {
                 required
                 aria-label="Type your message..."
             />
+            {isRecording ? (
+                <div>Microphone icon</div>
+            ) : (
+                <button type="button" onClick={handleMicrophoneClick}>
+                    Microphone icon
+                </button>
+            )}
             <button type="submit">Send</button>
         </form>
     );
