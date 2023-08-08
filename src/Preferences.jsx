@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Form, FormGroup, Label, Button } from 'react-bootstrap';
 
 const Preferences = ({ onShow, onHide, onSettingsChange }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -140,24 +141,28 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                     >
                         Save Settings
                     </button>
-                    {isEditing && (
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setShowSettings(false);
-                                setIsEditing(false);
-                                if (onHide && typeof onHide === "function") {
-                                    onHide();
-                                }
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    )}
+                    <Form role="form" aria-label="Chat settings">
+    return (
+        <Form role="form" aria-label="Chat settings">
+            {showSettings && (
+                <div>
+                    <h2>Settings</h2>
+                    <FormGroup>
+                        <Label htmlFor="api-key-input">API Key:</Label>
+                        {renderInput("apiKey")}
+                    </FormGroup>
+                    ...
+                    <Button
+                        onClick={handleSaveSettings}
+                        disabled={!settings.apiKey || !settings.prompt}
+                    >
+                        Save Settings
+                    </Button>
+                    ...
                 </div>
             )}
             {!showSettings && !isEditing && (
-                <button
+                <Button
                     type="button"
                     onClick={() => {
                         setIsEditing(true);
@@ -168,9 +173,9 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                     }}
                 >
                     Edit Preferences
-                </button>
+                </Button>
             )}
-        </div>
+        </Form>
     );
 };
 export default Preferences;

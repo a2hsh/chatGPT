@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container } from 'react-bootstrap';
 import Preferences from "./Preferences";
 import ChatInput from "./ChatInput";
 import ChatMessages from "./ChatMessages";
@@ -114,27 +115,29 @@ const App = () => {
     };
 
     return (
-        <div className="app">
-            <Preferences
-                onShow={onSettingsShow}
-                onHide={onSettingsHide}
-                onSettingsChange={onSettingsChange}
-            />
-            {canChat && settings && (
-                <>
-                    <ChatMessages messages={messages} />
-                    <ChatInput sendMessage={sendMessage} />
-                    <div
-                        className="api-typing-status"
-                        aria-live="polite"
-                        aria-atomic="true"
-                        role="status"
-                    >
-                        {isApiTyping ? "ChatGPT is typing..." : ""}
-                    </div>
-                </>
-            )}
-        </div>
-    );
+            <Container>
+                <Preferences
+                    onShow={onSettingsShow}
+                    onHide={onSettingsHide}
+                    onSettingsChange={onSettingsChange}
+                    role="form"
+                    aria-label="Chat settings"
+                />
+                {canChat && settings && (
+                    <>
+                        <ChatMessages messages={messages} role="log" aria-label="Chat messages" />
+                        <ChatInput sendMessage={sendMessage} role="textbox" aria-label="Chat input" />
+                        <div
+                            className="api-typing-status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                            role="status"
+                        >
+                            {isApiTyping ? "ChatGPT is typing..." : ""}
+                        </div>
+                    </>
+                )}
+            </Container>
+        );
 };
 export default App;

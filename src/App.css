@@ -34,19 +34,19 @@
 }
 
 .card {
-    padding: 2em;
+    padding: 3rem;
 }
 
 .read-the-docs {
     color: #888;
 }
 .chat-messages {
-    max-height: 400px;
+    max-height: 100%;
     overflow-y: auto;
     margin-bottom: 1rem;
     padding: 1rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: .25rem;
 }
 
 .chat-message {
