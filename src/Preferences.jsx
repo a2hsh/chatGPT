@@ -135,6 +135,7 @@ const Preferences = ({ onShow, onHide, onSettingsChange }) => {
                             <option value="gpt-3.5">GPT-3.5</option>
                             <option value="gpt-4">GPT-4</option>
                             <option value="gpt-4-32k">GPT-4 32K</option>
+                            <option value="gpt-4o">GPT-4 O</option>
                             {/* Add other models here as necessary */}
                         </select>
                     </FormGroup>
